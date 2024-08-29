@@ -1,31 +1,31 @@
-import React, { useRef, useState } from 'react';
+import img3 from './assets/gimg-1.png';
+import img2 from './assets/gimg-3.png';
+import img1 from './assets/gimg-2.png';
 import profile from './assets/irr.png';
-import { TbBriefcase2Filled } from "react-icons/tb";
 import { MdHome } from "react-icons/md";
 import emoji from './assets/emojji.png';
 import { FaPlus } from "react-icons/fa6";
 import Tooltip from './Common-compo/Tooltip';
-import SquareChips from './Common-compo/SquareChips';
-import { IoIosPeople, IoIosPaper } from 'react-icons/io'; // Adjust imports as necessary
-import { FaHandsHoldingChild, FaHandsHoldingCircle } from 'react-icons/fa6';
-import { GiSamuraiHelmet } from 'react-icons/gi';
 import { GiPartyPopper } from "react-icons/gi";
+import React, { useRef, useState } from 'react';
+import { GiSamuraiHelmet } from 'react-icons/gi';
+import { TbBriefcase2Filled } from "react-icons/tb";
+import SquareChips from './Common-compo/SquareChips';
+import { IoIosPeople, IoIosPaper } from 'react-icons/io';
 import { IoIosInformationCircleOutline } from "react-icons/io";
-import img1 from './assets/img1.png';
-import img2 from './assets/img2.png';
-import img3 from './assets/girl.png'
+import { FaHandsHoldingChild, FaHandsHoldingCircle } from 'react-icons/fa6';
 
 const userRating = [
-    {label: "IQ", points: 3.5, colors: "rose" },
+    { label: "IQ", points: 3.5, colors: "rose" },
     { label: "Appeal", points: 4.0, color: "orange" },
     { label: "Social", points: 4.2, color: "blue" },
     { label: "Humanity", points: 3.8, color: "lime" }
 ];
 
 const followers = [
-    { count: "15", label: "Inner" },
-    { count: "2.3k", label: "Outer" },
-    { count: "2.3k", label: "Universe" }
+    { count: "15", label: "Inner", textColor: "text-slate-900" },
+    { count: "2.3k", label: "Outer", textColor: "text-slate-500" },
+    { count: "2.3k", label: "Universe", textColor: "text-slate-400" }
 ];
 
 const textData = [
@@ -56,6 +56,8 @@ const navbarItems = [
     { label: "APPEAL" },
     { label: "SOCIAL" },
     { label: "IQ" },
+    { label: "APPEAL" },
+    { label: "SOCIAL" },
 ];
 
 const galleryImg = [
@@ -79,8 +81,9 @@ const dashboard = () => {
         'Frank',
         'Grace',
         'Hannah',
+        'Eve',
+        'Frank'
     ];
-
 
     const handleMouseDown = (event) => {
         event.preventDefault();
@@ -88,17 +91,12 @@ const dashboard = () => {
 
         const onMouseMove = (event) => {
             let newLeft = event.clientX - shiftX - containerRef.current.getBoundingClientRect().left;
-
-            // Restrict movement within the bounds of the parent div
             const rightEdge = containerRef.current.offsetWidth - emojiRef.current.offsetWidth;
             if (newLeft < 0) newLeft = 0;
             if (newLeft > rightEdge) newLeft = rightEdge;
-
             setPosition(newLeft);
-
-            // Calculate the decimal position based on the total length of 5
             const decimalPosition = (newLeft / rightEdge) * 5;
-            setDisplayPosition(decimalPosition.toFixed(1)); // Show one decimal place
+            setDisplayPosition(decimalPosition.toFixed(1));
         };
 
         document.addEventListener('mousemove', onMouseMove);
@@ -110,18 +108,18 @@ const dashboard = () => {
     };
 
     return (
-        <div className='flex flex-col w-full border border-slate-100 bg-white mx-auto justify-center py-9 px-7'>
-            <div className='flex mx-auto '>
-                <div className='flex flex-col justify-center items-center text-center'>
-                    <img src={profile} alt="img" className='h-[150px] w-[160px] mx-auto' />
+        <div className='flex flex-col w-full border border-slate-100 bg-white mx-auto justify-center py-9 sm:py-5 sm:px-2'>
+            <div className='flex flx-row mx-auto xs:flex-col sm:flex-col gap-6 md:flex-col lg:flex-row sm:w-full md:w-full px-4'>
+                <div className='flex flex-col justify-center items-center text-center w-full'>
+                    <img src={profile} alt="img" className='h-[180px] w-[190px] mx-auto' />
                     <p className='text-lg font-bold mx-auto'>70%<span className='font-light text-sm'> Vibes Match</span></p>
                 </div>
 
-                <div className='justify-between space-x-4 '>
-                    <div className='flex flex-row '>
-                        <div>
+                <div className='justify-between'>
+                    <div className='flex flex-row sm:flex-col md:flex-row'>
+                        <div className='sm:mx-auto md:mx-auto my-auto'>
                             <p className='text-[10px] text-slate-500 mx-auto'>(0.0 Vibes)</p>
-                            <h1 className='text-2xl font-bold mx-2'>4.2</h1>
+                            <h1 className='text-[25px] font-[800] mx-2'>4.2</h1>
                         </div>
 
                         <div className='flex'>
@@ -150,14 +148,17 @@ const dashboard = () => {
                         </div>
                     </div>
 
-                    <div className='flex flex-row justify-between'>
+                    <div className='flex flex-row justify-between sm:w-full md:w-full'>
                         <div>
                             <h1 className='font-bold text-sm text-slate-900'>Ironmanfanpage</h1>
                             <p className='text-xs text-slate-600 font-medium'>@ironmanisbest</p>
                         </div>
                         <button
-                            className="bg-slate-50 text-sky-400 my-auto shadow-xl text-xs rounded-full font-medium px-4 border border-slate-100
-                             h-[25px] mr-[50px]">Join now</button>
+                            className="bg-white outline-none text-sky-500 my-auto shadow-lg text-center rounded-full 
+             font-semibold px-5 py-1 border border-slate-50 text-sm
+             transform transition-transform duration-300 hover:scale-110 hover:shadow-3xl">
+                            Join Now
+                        </button>
                     </div>
 
                     <div>
@@ -175,14 +176,16 @@ const dashboard = () => {
                                         key={i}
                                         className={`flex flex-col ${i === 0 || i === 1 ? 'border-r-2 border-gray-300' : ''} px-3 text-center items-center`}
                                     >
-                                        <h1 className='text-slate-600 font-semibold'>{item.count}</h1>
-                                        <p className='font-light text-xs text-slate-500'>{item.label}</p>
+                                        <h1 className={`${item.textColor} font-bold`}>{item.count}</h1>
+                                        <p className={`font-normal text-xs ${item.textColor}`}>{item.label}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        <p className='text-slate-500 text-sm w-[400px] my-4'>Greatest superhero of all the time. Perfect combination of intelligence and looks</p>
+                        <p className='text-slate-500 text-sm w-full sm:w-3/4 md:w-[400px] lg:w-1/2 my-4'>
+                            Greatest superhero of all the time. Perfect combination of intelligence and looks
+                        </p>
 
                         <div>
                             <ul className='flex flex-row space-x-3'>
@@ -197,12 +200,12 @@ const dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-row gap-2 w-[60%] mx-auto my-6'>
+            <div className='flex flex-row gap-5 w-[60%] mx-auto my-6 sm:w-full sm:flex-row md:flex-row lg:flex-row px-4 md:w-full justify-center'>
                 <button
-                    className="bg-slate-50 text-slate-600 shadow-xl text-xs rounded-full font-normal px-4 border border-slate-100 h-[25px] mt-3">
+                    className="bg-[#f0efef] text-slate-600 shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] text-xs rounded-full py-2 border border-[#f0efef] w-[80px] mt-3 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg font-semibold">
                     Send Vibe
                 </button>
-                <div ref={containerRef} className="relative w-[80%] mt-6">
+                <div ref={containerRef} className="relative w-[60%] mt-6 sm:w-full md:w-full">
                     <hr className="w-full border-0 h-[2px] bg-gradient-to-r from-pink-500 via-green-500 to-yellow-300" />
 
                     <div
@@ -221,13 +224,18 @@ const dashboard = () => {
                 </div>
             </div>
             <div className='flex flex-col w-[90%] mx-auto'>
-                <div className="space-y-4 flex flex-row w-full text-center items-center gap-2">
-                    <FaPlus className='mt-3 text-bold cursor-pointer' />
-                    {userNames?.map((name, index) => (
-                        <Tooltip key={index} name={name} />
-                    ))}
+                <div className="space-y-4 flex flex-row w-full text-center items-center gap-2 sm:flex-wrap md:flex-wrap">
+                    <div className='w-[20%]'>
+
+                    </div>
+                    <div className='flex flex-row w-full sm:flex-wrap md:flex-wrap lg:flex-wrap'>
+                        <FaPlus className='my-auto text-bold cursor-pointer' />
+                        {userNames?.map((name, index) => (
+                            <Tooltip key={index} name={name} />
+                        ))}
+                    </div>
                 </div>
-                <div className="flex flex-wrap gap-4 p-4 mx-auto">
+                <div className="flex flex-wrap gap-4 p-4 mx-auto sm:gap-2 md:gap-2">
                     {chipsIcons.map((chip, index) => (
                         <SquareChips
                             key={index}
@@ -236,35 +244,37 @@ const dashboard = () => {
                         />
                     ))}
                 </div>
-                <section className="text-gray-600 body-font">
-                    <div className="container px-5 mx-auto flex flex-wrap flex-col border-b-2 border-slate-200">
-                        <div className="flex mx-auto flex-wrap">
+                <section className="text-gray-600 body-font w-[70%] sm:w-full md:w-full lg:w-full mx-auto">
+                    <div className="px-5 sm:px-0 md:px-0 mx-auto flex flex-wrap flex-col border-b-2 border-slate-200">
+                        <div className="flex mx-auto flex-row lg:w-[80%] md:w-1/2 sm:w-full w-[40%]">
                             {userNave?.map((item, index) => (
                                 <a
                                     key={index}
                                     href="#"
-                                    className="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center text-xs leading-none border-transparent text-gray-500 hover:text-pink-500 hover:border-pink-500 tracking-wider rounded-t transition duration-300 ease-in-out "
+                                    className="py-3 w-full sm:w-auto gap-2 border-b-2 title-font font-medium inline-flex items-center text-xs leading-none border-transparent text-gray-500 hover:text-pink-500 hover:border-pink-500 tracking-wider rounded-t transition duration-300 ease-in-out focus:outline-none mx-5 sm:mx-1 md:mx-1 focus:text-pink-500 focus:border-pink-500"
                                 >
-                                    <item.icon className="w-5 h-5 mr-3" />
+                                    <item.icon className="w-5 h-5" />
                                     {item.label}
                                 </a>
                             ))}
                         </div>
                     </div>
                 </section>
-                <div className='w-full flex flex-wrap text-center items-center'>
-                    <div className="space-y-4 flex flex-row w-full text-center items-center my-2">
+                <div className='flex text-center items-center w-full mx-auto'>
+                    <div className='w-[20%] sm:w-0 md:w-0'>
+                    </div>
+                    <div className="py-5 flex flex-row sm:flex-wrap md:flex-wrap lg:flex-wrap w-full text-center items-center my-2">
                         {navbarItems?.map((name, index) => (
                             <Tooltip key={index} name={name.label} />
                         ))}
                     </div>
                 </div>
-                <div className='flex flex-wrap my-3'>
+                <div className='flex flex-row my-1 mx-auto gap-1'>
                     {galleryImg?.map((item, i) => (
                         <img
                             src={item.img}
                             alt="img"
-                            className='m-1 h-[30%] w-[30%]'
+                            className='h-[35%] w-[35%] rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden'
                         />
                     ))}
                 </div>
